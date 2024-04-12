@@ -29,6 +29,17 @@ jobs:
           name: Build and Test
           command: ./gradlew build --scan
 
+      - run:
+          name: Archive JAR file
+          command: |
+            mkdir -p ~/artifacts
+            cp build/libs/*.jar ~/artifacts/
+
+      - persist_to_workspace:
+          root: ~/artifacts
+          paths:
+            - '*.jar'
+
 workflows:
   version: 2
   build_only_main:
