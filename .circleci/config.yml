@@ -36,6 +36,12 @@ jobs:
             ls build/libs/
             cp build/libs/*.jar ~/artifacts/
 
+      - store_artifacts:
+          path: build/libs/*
+          destination:  ~/artifacts/
+      - store_artifacts:
+          path: /tmp/artifacts
+
       - persist_to_workspace:
           root: ~/artifacts
           paths:
