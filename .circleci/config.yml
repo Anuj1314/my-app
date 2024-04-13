@@ -17,13 +17,13 @@ jobs:
             apt update
             apt install -y openjdk-17-jdk
 
-      # Set Java 17 environment variables
-      - run:
-          name: Set Java 17 Environment
-          command: |
-            echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $BASH_ENV
-            echo "export PATH=$JAVA_HOME/bin:$PATH" >> $BASH_ENV
-            source $BASH_ENV
+      # # Set Java 17 environment variables
+      # - run:
+      #     name: Set Java 17 Environment
+      #     command: |
+      #       echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $BASH_ENV
+      #       echo "export PATH=$JAVA_HOME/bin:$PATH" >> $BASH_ENV
+      #       source $BASH_ENV
 
       - run:
           name: Build and Test
@@ -33,6 +33,7 @@ jobs:
           name: Archive JAR file
           command: |
             mkdir -p ~/artifacts
+            ls build/libs/
             cp build/libs/*.jar ~/artifacts/
 
       - persist_to_workspace:
@@ -42,7 +43,7 @@ jobs:
 
 workflows:
   version: 2
-  build_only_main:
+  build_springboot:
     jobs:
       - build:
           filters:
